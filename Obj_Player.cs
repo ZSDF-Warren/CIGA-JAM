@@ -50,11 +50,11 @@ public class Obj_Player : Obj_Char
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            move(new Vector2Int(1, 0));
+            move(new Vector2Int(-1, 0));
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            move(new Vector2Int(-1, 0));
+            move(new Vector2Int(0, -1));
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
