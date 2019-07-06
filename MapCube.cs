@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MapCube : MonoBehaviour
 {
-    Vector2Int Pos;
-    bool WalkAble;
-    Obj_Char ObjAbove;
+    public Vector2Int Pos;
+    public bool WalkAble;
+    public Obj_Char ObjAbove;
 
     // Start is called before the first frame update
     void Start()
