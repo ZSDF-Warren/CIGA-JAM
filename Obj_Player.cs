@@ -28,7 +28,7 @@ public class Obj_Player : Obj_Char
 
                     _cube = item;
                     _cube.ObjAbove = this;
-
+                    this.transform.position = _cube.transform.position;
                     return;
                 }
                 else
