@@ -57,7 +57,7 @@ public class DirSave
     /// 保存文件
     /// </summary>
     /// <param name="eDir"></param>
-    public void SaveDirToFile(EDIR eDir)
+    private void SaveDirToFile(EDIR eDir)
     {
         //文件流
         FileStream fs = File.OpenWrite(path);
