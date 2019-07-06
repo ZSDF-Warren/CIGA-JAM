@@ -23,7 +23,7 @@ public class MapMgr
 
     }
 
-    List<MapCube> CubeList;
+    public List<MapCube> CubeList;
     // Start is called before the first frame update
     void Start()
     {
