@@ -1,9 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class DirSave
 {
+    //第一步访问Txt文件
+    string path;
+
+    /// <summary>
+    /// 文本的Data信息
+    /// </summary>
+    private List<string> _data = new List<string>();
+    public List<string> Data
+    {
+        get
+        {
+            if(_data.Count == 0)
+                ReadDirFromFIle();
+            return _data;
+        }
+        //set { _data = value; }
+    }
+
+    /// <summary>
+    /// DirSave单列
+    /// </summary>
     private static DirSave _instance;
     public static DirSave Instance()
     {
@@ -12,8 +35,15 @@ public class DirSave
         return _instance;
     }
 
-    DirSave() { }
+    /// <summary>
+    /// 私有类型的
+    /// 无参构造
+    /// </summary>
+    DirSave() { path = Application.dataPath + "/Map/Dir.txt"; }
 
+    /// <summary>
+    /// 方向枚举
+    /// </summary>
     public enum EDIR
     {
         eNone = -1,
@@ -23,5 +53,51 @@ public class DirSave
         eRight,
     }
 
+    /// <summary>
+    /// 保存文件
+    /// </summary>
+    /// <param name="eDir"></param>
+    public void SaveDirToFile(EDIR eDir)
+    {
+        //文件流
+        FileStream fs = File.OpenWrite(path);
+        //第二步填充内容
+        StringBuilder sb = new StringBuilder();
+        sb.Append(eDir + ",");
+        byte[] map = Encoding.UTF8.GetBytes(sb.ToString());
+        fs.Write(map, 0, map.Length);
+        fs.Close();
+        fs.Dispose();
+    }
+
+
+
+    /// <summary>
+    /// 返回方向文本内容
+    /// </summary>
+    /// <returns></returns>
+    private void ReadDirFromFIle()
+    {
+        //文件读写流
+        StreamReader sr = new StreamReader(path);
+        //读取内容
+        string result = sr.ReadToEnd();
+        //逐行截取(这样截取的数据可能会有问题，如多一行或对一个空格，需要调整)
+        // 可以自行百度方法解决，也可以按实际手动修改
+        SplitString( result.Split(',') );
+        
+    }
+
+    /// <summary>
+    /// 读取文本的内容
+    /// </summary>
+    /// <param name="data"></param>
+    private void SplitString(string[] data)
+    {
+        foreach (string item in data)
+        {
+            _data.Add(item);
+        }
+    }
 
 }
