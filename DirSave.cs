@@ -39,7 +39,7 @@ public class DirSave
     /// 私有类型的
     /// 无参构造
     /// </summary>
-    DirSave() { path = Application.dataPath + "/Map/Dir.txt"; }
+    DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; ClearContent(); }
 
     /// <summary>
     /// 方向枚举
@@ -57,20 +57,25 @@ public class DirSave
     /// 保存文件
     /// </summary>
     /// <param name="eDir"></param>
-    private void SaveDirToFile(EDIR eDir)
+    public void SaveDirToFile(EDIR eDir) 
     {
+        //文件读写流
+        StreamReader sr = new StreamReader(path);
+        //读取内容
+        string result = sr.ReadToEnd();
+        sr.Close();
+        sr.Dispose();
+
         //文件流
         FileStream fs = File.OpenWrite(path);
         //第二步填充内容
         StringBuilder sb = new StringBuilder();
-        sb.Append(eDir + ",");
+        sb.Append(result + eDir.GetHashCode() + ",");
         byte[] map = Encoding.UTF8.GetBytes(sb.ToString());
         fs.Write(map, 0, map.Length);
         fs.Close();
         fs.Dispose();
     }
-
-
 
     /// <summary>
     /// 返回方向文本内容
@@ -98,6 +103,16 @@ public class DirSave
         {
             _data.Add(item);
         }
+    }
+
+    /// <summary>
+    /// 覆盖清空TXT
+    /// </summary>
+    private void ClearContent()
+    {
+        FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+        fs.Close();
+        fs.Dispose();
     }
 
 }
