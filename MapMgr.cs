@@ -18,5 +18,13 @@ public class MapMgr: MonoBehaviour
             _instance = this;
     }
 
+    public void Init()
+    {
+        foreach (MapCube item in CubeList)
+        {
+            item.gameObject.transform.position = new Vector3(item.Pos.x, item.Pos.y, 0.0f) + this.transform.position;
+        }
+
+    }
 
 }
