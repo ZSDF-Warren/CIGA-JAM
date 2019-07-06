@@ -39,7 +39,8 @@ public class DirSave
     /// 私有类型的
     /// 无参构造
     /// </summary>
-    DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; ClearContent(); }
+    DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; /*ClearContent();*/ }
+    //DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; ClearContent(); }
 
     /// <summary>
     /// 方向枚举
@@ -101,7 +102,8 @@ public class DirSave
     {
         foreach (string item in data)
         {
-            _data.Add(item);
+            if(item != "")
+                _data.Add(item);
         }
     }
 

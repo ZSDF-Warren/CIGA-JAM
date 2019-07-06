@@ -13,11 +13,14 @@ public class MapMgr: MonoBehaviour
     private static MapMgr _instance;
     public static MapMgr Instance
     {
-        get { return _instance; }
+        get
+        {
+            return _instance;
+        }
     }
 
 
-    public void Start()
+    public void Awake()
     {
         if (_instance == null)
             _instance = this;
@@ -25,6 +28,9 @@ public class MapMgr: MonoBehaviour
         Init();
     }
 
+    /// <summary>
+    /// 初始化
+    /// </summary>
     public void Init()
     {
         foreach (MapCube item in CubeList)
@@ -33,6 +39,11 @@ public class MapMgr: MonoBehaviour
             //初始
             item.Init();
         }
+
+    }
+
+    public void RotationController()
+    {
 
     }
 
