@@ -11,6 +11,11 @@ public class MapMgr: MonoBehaviour
     /// MapMgr 单列
     /// </summary>
     private static MapMgr _instance;
+    public static MapMgr Instance
+    {
+        get { return _instance; }
+    }
+
 
     public void Start()
     {
