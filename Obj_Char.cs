@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Obj_Char : MonoBehaviour
 {
-    MapCube _cube;
+
+    public MapCube _cube;
 
 
 

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Obj_Player : MonoBehaviour
 {
+    public Vector2Int dir;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
