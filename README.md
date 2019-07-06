@@ -1,2 +1,0 @@
-# CIGA-JAM
-CIGA JAM
