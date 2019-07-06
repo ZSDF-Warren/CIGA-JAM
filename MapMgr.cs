@@ -2,37 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapMgr
+public class MapMgr: MonoBehaviour
 {
+    //地图块儿列表
+    public List<MapCube> CubeList;
+
+    /// <summary>
+    /// MapMgr 单列
+    /// </summary>
     private static MapMgr _instance;
-    public static MapMgr Instance()
+
+    public void Start()
     {
         if (_instance == null)
-            _instance = new MapMgr();
-
-        return _instance;
+            _instance = this;
     }
 
-    private MapMgr()
+    public void Init()
     {
-        Init();
+        foreach (MapCube item in CubeList)
+        {
+            item.gameObject.transform.position = new Vector3(item.Pos.x, item.Pos.y, 0.0f) + this.transform.position;
+        }
+
     }
 
-    private void Init()
-    {
-
-    }
-
-    public List<MapCube> CubeList;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
