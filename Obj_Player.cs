@@ -17,7 +17,7 @@ public class Obj_Player : Obj_Char
     void move(Vector2Int d)
     {
         var des = d + _cube.Pos;
-        foreach (var item in MapMgr.Instance().CubeList)
+        foreach (var item in MapMgr.Instance.CubeList)
         {
             if(item.Pos==des)
             {
