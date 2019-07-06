@@ -6,7 +6,10 @@ public class Obj_Player : Obj_Char
 {
     public Vector2Int dir;
 
-
+    public int Cross(Vector2Int v1,Vector2Int v2)
+    {
+        return v1.x * v2.y - v2.x * v1.y;
+    }
 
 
     // Start is called before the first frame update
@@ -23,6 +26,31 @@ public class Obj_Player : Obj_Char
             {
                 if(item.WalkAble)
                 {
+                    if(dir==d)
+                    {
+                        //前
+                    }
+                    else if(dir==new Vector2Int(-d.x,-d.y))
+                    {
+                        //后
+                    }
+                    else
+                    {
+                        if(Cross(dir, d)==1)
+                        {
+                            //left
+                        }
+
+                        else if(Cross(dir, d) == -1)
+                        {
+                            //right
+                        }
+                        else
+                        {
+                            //bug
+                        }
+                    }
+                    
                     dir = d;
                     _cube.ObjAbove = null;
 
