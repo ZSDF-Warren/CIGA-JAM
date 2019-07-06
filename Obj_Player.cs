@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,20 +14,20 @@ public class Obj_Player : Obj_Char
 
     public void zombieMove()
     {
-        //遍历
+        foreach (string str in DirSave.Instance().Data)
         {
             //向前走
-            if (true)
+            if (Convert.ToInt32(str) == DirSave.EDIR.eUp.GetHashCode())
             {
                 move(dir);
             }
             //backword
-            else if (true)
+            else if (Convert.ToInt32(str) == DirSave.EDIR.eDown.GetHashCode())
             {
                 move(new Vector2Int(-dir.x, -dir.y));
             }
             //right
-            if (true)
+            if (str.Equals(Convert.ToInt32(str) == DirSave.EDIR.eRight.GetHashCode()))
             {
                 var d = dir;
                 if (dir == new Vector2Int(1, 0))
@@ -49,7 +50,7 @@ public class Obj_Player : Obj_Char
                 move(d);
             }
             //left
-            if (true)
+            if (Convert.ToInt32(str) == DirSave.EDIR.eLeft.GetHashCode()) 
             {
                 var d = dir;
                 if (dir == new Vector2Int(1, 0))
@@ -72,18 +73,15 @@ public class Obj_Player : Obj_Char
                 move(d);
             }
         }
-
-        //
-
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        //zombieMove();
     }
     public void move(Vector2Int d)
     {
-        var des = d + _cube.Pos;
+        var des = d + _cube.Pos; 
         foreach (var item in MapMgr.Instance.CubeList)
         {
             if (item.Pos == des)
