@@ -93,25 +93,30 @@ public class Obj_Player : Obj_Char
                     if (dir == d)
                     {
                         //前
+                        DirSave.Instance().SaveDirToFile(DirSave.EDIR.eUp);
                     }
                     else if (dir == new Vector2Int(-d.x, -d.y))
                     {
                         //后
+                        DirSave.Instance().SaveDirToFile(DirSave.EDIR.eDown);
                     }
                     else
                     {
                         if (Cross(dir, d) == 1)
                         {
                             //left
+                            DirSave.Instance().SaveDirToFile(DirSave.EDIR.eLeft);
                         }
 
                         else if (Cross(dir, d) == -1)
                         {
                             //right
+                            DirSave.Instance().SaveDirToFile(DirSave.EDIR.eRight);
                         }
                         else
                         {
                             //bug
+                            DirSave.Instance().SaveDirToFile(DirSave.EDIR.eNone);
                         }
                     }
 
