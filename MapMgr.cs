@@ -21,13 +21,17 @@ public class MapMgr: MonoBehaviour
     {
         if (_instance == null)
             _instance = this;
+
+        Init();
     }
 
     public void Init()
     {
         foreach (MapCube item in CubeList)
         {
-            item.gameObject.transform.position = new Vector3(item.Pos.x, item.Pos.y, 0.0f) + this.transform.position;
+            item.gameObject.transform.position = new Vector3(item.Pos.x, 0.0f, item.Pos.y) + this.transform.position;
+            //初始
+            item.Init();
         }
 
     }

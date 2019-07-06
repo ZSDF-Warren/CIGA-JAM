@@ -8,10 +8,10 @@ public class MapCube : MonoBehaviour
     public bool WalkAble;
     public Obj_Char ObjAbove;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Init()
     {
+        if (ObjAbove != null)
+            ObjAbove.gameObject.transform.position = this.transform.position;
     }
-
 
 }
