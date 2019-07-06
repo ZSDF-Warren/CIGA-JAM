@@ -30,6 +30,7 @@ public class Obj_Player : Obj_Char
                     _cube.ObjAbove = this;
                     this.transform.position = _cube.transform.position;
                     return;
+                    
                 }
                 else
                 {
@@ -45,19 +46,19 @@ public class Obj_Player : Obj_Char
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            move(new Vector2Int(1, 0));
+            move(new Vector2Int(0, 1));
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            move(new Vector2Int(-1, 0));
+            move(new Vector2Int(1, 0));
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            move(new Vector2Int(0, -1));
+            move(new Vector2Int(-1, 0));
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            move(new Vector2Int(0, 1));
+            move(new Vector2Int(1, 0));
         }
 
     }
