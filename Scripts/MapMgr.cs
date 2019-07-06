@@ -2,11 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapMgr : MonoBehaviour
+public class MapMgr
 {
+    private static MapMgr _instance;
+    public static MapMgr Instance()
+    {
+        if (_instance == null)
+            _instance = new MapMgr();
 
+        return _instance;
+    }
 
-    public List<MapCube> CubeList;
+    private MapMgr()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+
+    }
+
+    List<MapCube> CubeList;
     // Start is called before the first frame update
     void Start()
     {
