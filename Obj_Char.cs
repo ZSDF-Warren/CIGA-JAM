@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obj_Char : MonoBehaviour
 {
-
+    [Header("所在块")]
     public MapCube _cube;
 
 

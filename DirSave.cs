@@ -39,8 +39,19 @@ public class DirSave
     /// 私有类型的
     /// 无参构造
     /// </summary>
-    DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; /*ClearContent();*/ }
-    //DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; ClearContent(); }
+    //DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; }
+    DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; ClearContent(); }
+
+
+
+
+    //********************************************策划看*********************************************************//
+    //    上面的两句话，有ClearContent();的语句为覆盖，测试1周目用
+    //     无为不覆盖，在一周目走完后换成没有ClearContent();的，可以测试二周目。
+    //      测试二周目需要打开obj_zombie,关掉Obj_Player。
+    //*************************************************************************************************************//
+
+
 
     /// <summary>
     /// 方向枚举

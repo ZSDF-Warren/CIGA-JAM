@@ -8,6 +8,7 @@ public class WayHelper : Obj_Char
     public Obj_zombie zom;
     public GameObject helperPrefab;
     public Vector2Int dir;
+    [HideInInspector]
     public int indix;
     public void showWay()
     {

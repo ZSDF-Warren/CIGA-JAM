@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapMgr: MonoBehaviour
 {
+    [Header("旋转上面的transform来适配大方向")]
     //地图块儿列表
     public List<MapCube> CubeList;
 
@@ -35,7 +36,7 @@ public class MapMgr: MonoBehaviour
     {
         foreach (MapCube item in CubeList)
         {
-            item.gameObject.transform.position = new Vector3(item.Pos.x, 0.0f, item.Pos.y) + this.transform.position;
+            item.gameObject.transform.position = this.transform.forward* item.Pos.y + this.transform.right * item.Pos.x  + this.transform.position;
             //初始
             item.Init();
         }
