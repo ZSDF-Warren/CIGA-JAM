@@ -58,10 +58,10 @@ public class obj_Trigger : Obj_Char
     public void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Y) || tri)
+        if ((Input.GetKeyDown(KeyCode.Y) || tri))
         {
             tri = false;
-            if (!isRotating)
+            if (MapMgr.Instance.canMove && !isRotating)
             {
                 startRoutation();
 
@@ -90,6 +90,7 @@ public class obj_Trigger : Obj_Char
                     ffff.gameObject.transform.DetachChildren();
                     isMovingDown = false;
                     isRotating = false;
+                    MapMgr.Instance.canMove = true;
                 }
             }
             else
@@ -117,6 +118,7 @@ public class obj_Trigger : Obj_Char
     //once
     public void startRoutation()
     {
+        MapMgr.Instance.canMove = false;
         getAllCubes();
         if (_angle == angle.acw)
             AcwRotationBlocks();
