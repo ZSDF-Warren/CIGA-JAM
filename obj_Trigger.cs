@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class obj_Trigger : Obj_Char
 {
+
+    public Animator A;
     [Header("点击触发按钮")]
     public bool tri;
     [Header("旋转中心块")]
@@ -64,7 +66,7 @@ public class obj_Trigger : Obj_Char
             if (MapMgr.Instance.canMove && !isRotating)
             {
                 startRoutation();
-
+                A.Play("switch");
             }
 
         }
@@ -246,6 +248,8 @@ public class obj_Trigger : Obj_Char
         if (other.transform.tag == "Player" || other.transform.tag == "Zombie")
         {
             tri = true;
+
         }
+
     }
 }

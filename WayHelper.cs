@@ -182,7 +182,10 @@ public class WayHelper : Obj_Char
                     _cube = item;
                     //_cube.ObjAbove = this;
                     //this.transform.position = _cube.transform.position;
-                    GameObject G = Instantiate(helperPrefab, _cube.transform.position, this.transform.rotation, this.transform);
+                    GameObject G = Instantiate(helperPrefab, _cube.transform.position, new Quaternion(), this.transform);
+
+                    //G.transform.rotation = new Quaternion(180, -90, 0, 0);
+                    G.transform.LookAt(item.transform.position+-MapMgr.Instance.transform.forward*d.x + MapMgr.Instance.transform.right* d.y);
                     return true;
 
                 }

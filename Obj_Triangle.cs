@@ -6,7 +6,10 @@ public class Obj_Triangle : Obj_Char
 {
     [Header("一键切关")]
     public bool tri;
-
+    private void Start()
+    {
+        this.gameObject.SetActive(!ScenesManager.Instance().isPowerOn);
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.transform.name);
