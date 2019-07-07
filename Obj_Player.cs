@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Obj_Player : Obj_Char
 {
+    [Header("玩家朝向右上为正")]
     public Vector2Int dir;
 
     public int Cross(Vector2Int v1, Vector2Int v2)
@@ -81,7 +82,9 @@ public class Obj_Player : Obj_Char
     }
     public void move(Vector2Int d)
     {
-        var des = d + _cube.Pos; 
+
+        var des = d + _cube.Pos;
+        Debug.Log(des);
         foreach (var item in MapMgr.Instance.CubeList)
         {
             if (item.Pos == des)
