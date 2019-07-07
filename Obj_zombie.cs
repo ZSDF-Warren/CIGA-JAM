@@ -197,7 +197,7 @@ public class Obj_zombie : Obj_Char
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&&MapMgr.Instance.canMove)
         {
             zombieMove(indix++);
             helper.showWay();

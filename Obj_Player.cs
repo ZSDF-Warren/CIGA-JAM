@@ -89,21 +89,25 @@ public class Obj_Player : Obj_Char
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if(MapMgr.Instance.canMove)
         {
-            move(new Vector2Int(0, 1));
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            move(new Vector2Int(-1, 0));
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            move(new Vector2Int(0, -1));
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            move(new Vector2Int(1, 0));
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                move(new Vector2Int(0, 1));
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                move(new Vector2Int(-1, 0));
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                move(new Vector2Int(0, -1));
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                move(new Vector2Int(1, 0));
+            }
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
