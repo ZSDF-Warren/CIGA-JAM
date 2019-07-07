@@ -36,6 +36,9 @@ public class DirSave
         return _instance;
     }
 
+    /// <summary>
+    /// 关卡名
+    /// </summary>
     private string _sceneName;
 
 
@@ -43,8 +46,8 @@ public class DirSave
     /// 私有类型的
     /// 无参构造
     /// </summary>
-    //DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt"; ClearContent();}
-    DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt"; /*ClearContent();*/}
+    DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt";}
+    //DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt"; /*ClearContent();*/}
 
 
 
@@ -124,11 +127,12 @@ public class DirSave
     /// <summary>
     /// 覆盖清空TXT
     /// </summary>
-    private void ClearContent()
+    public void ClearContent()
     {
+        if (ScenesManager.Instance().isPowerOn)
+            return;
         FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
         fs.Close();
         fs.Dispose();
     }
-
 }

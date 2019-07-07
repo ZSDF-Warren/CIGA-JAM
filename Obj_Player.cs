@@ -78,6 +78,13 @@ public class Obj_Player : Obj_Char
     // Start is called before the first frame update
     void Start()
     {
+        if (ScenesManager.Instance().isPowerOn)
+        {
+            this.enabled = false;
+            gameObject.GetComponent<Obj_zombie>().enabled = true;
+        }
+
+        DirSave.Instance().ClearContent();
         //zombieMove();
     }
     public void move(Vector2Int d)
@@ -158,6 +165,11 @@ public class Obj_Player : Obj_Char
         {
             move(new Vector2Int(1, 0));
         }
-
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            //重启关卡
+            ScenesManager.Instance().SceneLoad();
+        }
     }
+
 }
