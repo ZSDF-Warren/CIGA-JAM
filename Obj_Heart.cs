@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class Obj_Heart : Obj_Char
         if (other.transform.tag == "Player" || other.transform.tag == "Zombie")
         {
             tri = true;
+            //this.gameObject.SetActive(false);
         }
     }
 
@@ -21,7 +23,11 @@ public class Obj_Heart : Obj_Char
         if (tri)
         {
             tri = false;
-            Debug.LogError("Win");
+            Debug.LogError("进入下一关");
+            //Convert.ToInt32(str)
+            string str = ScenesManager.Instance().SceneName;
+            int idx = Convert.ToInt32(str) + 1;
+            ScenesManager.Instance().SceneLoad(idx);
         }
     }
 }

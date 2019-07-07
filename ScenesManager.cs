@@ -20,6 +20,8 @@ public class ScenesManager
     /// 关卡名
     /// </summary>
     private string _sceneName;
+    public string SceneName
+    { get { return _sceneName; } }
 
     /// <summary>
     /// 是否是第二次进入关卡
@@ -39,6 +41,14 @@ public class ScenesManager
         SceneManager.LoadScene(_sceneName);
         isPowerOn = true;
     }
+    /// <summary>
+    /// 重新加载当前SceneManager.LoadScene关卡
+    /// <param name="idx">关卡下表</param>
+    /// </summary>
+    public void SceneLoad(int idx)
+    {
+        SceneManager.LoadScene(idx - 1);
+    }
 
     /// <summary>
     /// 加载关卡
@@ -46,7 +56,8 @@ public class ScenesManager
     /// <param name="sceneName">关卡名</param>
     public void SceneLoad(string sceneName)
     {
-        DirSave.Instance().ClearContent();
+        SceneManager.LoadScene(sceneName);
+        //DirSave.Instance().ClearContent();
     }
 
 
