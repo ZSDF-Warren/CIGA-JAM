@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DirSave
 {
@@ -35,12 +36,15 @@ public class DirSave
         return _instance;
     }
 
+    private string _sceneName;
+
+
     /// <summary>
     /// 私有类型的
     /// 无参构造
     /// </summary>
-    DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; /*ClearContent();*/ }
-    //DirSave() { path = Application.dataPath + "/Resources/Dir.txt"; ClearContent(); }
+    //DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt"; ClearContent();}
+    DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt"; /*ClearContent();*/}
 
     /// <summary>
     /// 方向枚举
