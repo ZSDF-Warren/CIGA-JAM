@@ -24,7 +24,7 @@ public class HandMgr : MonoBehaviour
 
             //显示射线，只有在scene视图中才能看到
             Debug.DrawLine(ray.origin, hit.point);
-            if(Input.GetMouseButtonDown(0))
+            if(this.gameObject.tag == "Zombie" && Input.GetMouseButtonDown(0))
             {
                 if (hit.transform.tag == "trigger")
                 {

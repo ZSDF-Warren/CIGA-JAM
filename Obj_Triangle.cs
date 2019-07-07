@@ -24,7 +24,6 @@ public class Obj_Triangle : Obj_Char
         if (tri)
         {
             tri = false;
-
             ScenesManager.Instance().SceneLoad();
             Debug.LogError("二周目开始");
         }
