@@ -8,7 +8,7 @@ public class Obj_zombie : Obj_Char
     public Vector2Int dir;
     public int indix;
     public WayHelper helper;
-
+    public GameObject player_m;
     public int Cross(Vector2Int v1, Vector2Int v2)
     {
         return v1.x * v2.y - v2.x * v1.y;
@@ -167,6 +167,7 @@ public class Obj_zombie : Obj_Char
     }
     public bool move(Vector2Int d)
     {
+        player_m.GetComponent<Animator>().SetTrigger("walk");
         var des = d + _cube.Pos;
         foreach (var item in MapMgr.Instance.CubeList)
         {
@@ -197,6 +198,10 @@ public class Obj_zombie : Obj_Char
     // Update is called once per frame
     void Update()
     {
+        //player_m.GetComponent<Animator>().SetTrigger("walk");
+
+        player_m.transform.position = this.transform.position + Vector3.up * 2;
+        player_m.transform.LookAt(Camera.main.transform);
         if (Input.GetKeyDown(KeyCode.Space)&&MapMgr.Instance.canMove)
         {
             zombieMove(indix++);

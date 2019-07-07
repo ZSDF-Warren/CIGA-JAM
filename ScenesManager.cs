@@ -48,6 +48,7 @@ public class ScenesManager
     public void SceneLoad(int idx)
     {
         SceneManager.LoadScene(idx - 1);
+        isPowerOn = false;
     }
 
     /// <summary>
@@ -57,6 +58,7 @@ public class ScenesManager
     public void SceneLoad(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        isPowerOn = false;
         //DirSave.Instance().ClearContent();
     }
 

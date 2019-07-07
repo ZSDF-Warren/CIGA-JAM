@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Obj_Player : Obj_Char
 {
     [Header("玩家朝向右上为正")]
     public Vector2Int dir;
 
+    public GameObject player_m;
     public int Cross(Vector2Int v1, Vector2Int v2)
     {
         return v1.x * v2.y - v2.x * v1.y;
@@ -29,7 +31,9 @@ public class Obj_Player : Obj_Char
     }
     public void move(Vector2Int d)
     {
+        player_m.GetComponent<Animator>().SetTrigger("walk");
 
+        //player_m.SetBool("walk", true);
         var des = d + _cube.Pos;
         Debug.Log(des);
         foreach (var item in MapMgr.Instance.CubeList)
@@ -89,7 +93,9 @@ public class Obj_Player : Obj_Char
     // Update is called once per frame
     void Update()
     {
-        if(MapMgr.Instance.canMove)
+        player_m.transform.position = this.transform.position+Vector3.up*2;
+        player_m.transform.LookAt(Camera.main.transform);
+        if (MapMgr.Instance.canMove)
         {
 
             if (Input.GetKeyDown(KeyCode.W))
@@ -109,11 +115,14 @@ public class Obj_Player : Obj_Char
                 move(new Vector2Int(1, 0));
             }
         }
+        //player_m.SetBool("walk", false);
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             //重启关卡
             ScenesManager.Instance().SceneLoad();
         }
+        //player_m.GetComponent<Animator>().SetTrigger("walk");
     }
 
 }
