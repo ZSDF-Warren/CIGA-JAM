@@ -13,71 +13,11 @@ public class Obj_Player : Obj_Char
         return v1.x * v2.y - v2.x * v1.y;
     }
 
-    public void zombieMove()
-    {
-        foreach (string str in DirSave.Instance().Data)
-        {
-            //向前走
-            if (Convert.ToInt32(str) == DirSave.EDIR.eUp.GetHashCode())
-            {
-                move(dir);
-            }
-            //backword
-            else if (Convert.ToInt32(str) == DirSave.EDIR.eDown.GetHashCode())
-            {
-                move(new Vector2Int(-dir.x, -dir.y));
-            }
-            //right
-            if (str.Equals(Convert.ToInt32(str) == DirSave.EDIR.eRight.GetHashCode()))
-            {
-                var d = dir;
-                if (dir == new Vector2Int(1, 0))
-                {
-                    d = new Vector2Int(0, -1);
-                }
-                if (dir == new Vector2Int(0, 1))
-                {
-                    d = new Vector2Int(1, 0);
-                }
-                if (dir == new Vector2Int(-1, 0))
-                {
-                    d = new Vector2Int(0, 1);
 
-                }
-                if (dir == new Vector2Int(0, -1))
-                {
-                    d = new Vector2Int(-1, 0);
-                }
-                move(d);
-            }
-            //left
-            if (Convert.ToInt32(str) == DirSave.EDIR.eLeft.GetHashCode()) 
-            {
-                var d = dir;
-                if (dir == new Vector2Int(1, 0))
-                {
-                    d = new Vector2Int(0, 1);
-                }
-                if (dir == new Vector2Int(0, 1))
-                {
-                    d = new Vector2Int(-1, 0);
-                }
-                if (dir == new Vector2Int(-1, 0))
-                {
-                    d = new Vector2Int(0, -1);
-
-                }
-                if (dir == new Vector2Int(0, -1))
-                {
-                    d = new Vector2Int(1, 0);
-                }
-                move(d);
-            }
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {
+        this.gameObject.tag = "Player";
         if (ScenesManager.Instance().isPowerOn)
         {
             this.enabled = false;
@@ -85,7 +25,7 @@ public class Obj_Player : Obj_Char
         }
 
         DirSave.Instance().ClearContent();
-        //zombieMove();
+        
     }
     public void move(Vector2Int d)
     {

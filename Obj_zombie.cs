@@ -80,7 +80,11 @@ public class Obj_zombie : Obj_Char
     {
         bool flag = true;
         if (idx > DirSave.Instance().Data.Count - 1)
+        {
+            Debug.LogError("GG");
             return;
+
+        }
 
         string str = DirSave.Instance().Data[idx];
 
@@ -89,11 +93,14 @@ public class Obj_zombie : Obj_Char
         if (Convert.ToInt32(str) == DirSave.EDIR.eUp.GetHashCode())
         {
             flag = move(dir);
+            Debug.Log(dir);
         }
         //backword
         else if (Convert.ToInt32(str) == DirSave.EDIR.eDown.GetHashCode())
         {
             flag = move(new Vector2Int(-dir.x, -dir.y));
+            Debug.Log(new Vector2Int(-dir.x, -dir.y));
+
         }
         //right
         if (Convert.ToInt32(str) == DirSave.EDIR.eRight.GetHashCode())
@@ -117,6 +124,7 @@ public class Obj_zombie : Obj_Char
                 d = new Vector2Int(-1, 0);
             }
             flag = move(d);
+            Debug.Log(d);
         }
         //left
         if (Convert.ToInt32(str) == DirSave.EDIR.eLeft.GetHashCode())
@@ -140,8 +148,10 @@ public class Obj_zombie : Obj_Char
                 d = new Vector2Int(1, 0);
             }
             flag = move(d);
+            Debug.Log(d);
+
         }
-        if(flag==false)
+        if (flag==false)
         {
             Debug.LogError("GameOver");
         }
@@ -149,6 +159,7 @@ public class Obj_zombie : Obj_Char
     // Start is called before the first frame update
     void Start()
     {
+        this.gameObject.tag = "Zombie";
         //zombieMove();
         indix = 0;
         helper.showWay();

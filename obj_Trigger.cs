@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class obj_Trigger: Obj_Char
+public class obj_Trigger : Obj_Char
 {
     [Header("点击触发按钮")]
     public bool tri;
@@ -33,13 +33,13 @@ public class obj_Trigger: Obj_Char
     public void getAllCubes()
     {
         _cubes.Clear();
-        for (int i=-radius;i<=radius;i++)
+        for (int i = -radius; i <= radius; i++)
         {
-            for(int j=-radius; j<=radius;j++)
+            for (int j = -radius; j <= radius; j++)
             {
                 foreach (var item in MapMgr.Instance.CubeList)
                 {
-                    if ( _center.Pos + new Vector2Int(i, j) == item.Pos)
+                    if (_center.Pos + new Vector2Int(i, j) == item.Pos)
                     {
                         _cubes.Add(item);
                     }
@@ -51,19 +51,20 @@ public class obj_Trigger: Obj_Char
 
     public void Start()
     {
-        
+
         ffff = new GameObject();
 
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y)||tri)
+
+        if (Input.GetKeyDown(KeyCode.Y) || tri)
         {
             tri = false;
             if (!isRotating)
             {
                 startRoutation();
-                
+
             }
 
         }
@@ -71,10 +72,10 @@ public class obj_Trigger: Obj_Char
 
         if (isRotating)
         {
-            if(isMovingUp)
+            if (isMovingUp)
             {
-                ffff.transform.position = Vector3.Lerp(ffff.transform.position, ffff.transform.up+new Vector3( ffff.transform.position.x,0, ffff.transform.position.z), 0.01f);
-                if (Time.time-moveTime>1)
+                ffff.transform.position = Vector3.Lerp(ffff.transform.position, ffff.transform.up * 3 + new Vector3(ffff.transform.position.x, 0, ffff.transform.position.z), 0.01f);
+                if (Time.time - moveTime > 1)
                 {
                     isMovingUp = false;
                     startTime = Time.time;
@@ -82,8 +83,8 @@ public class obj_Trigger: Obj_Char
             }
             else if (isMovingDown)
             {
-                ffff.transform.position = Vector3.Lerp(ffff.transform.position, -ffff.transform.up+new Vector3(ffff.transform.position.x, 0, ffff.transform.position.z), 0.01f);
-                if (Mathf.Abs( ffff.transform.position.y-MapMgr.Instance.transform.position.y)<0.01f)
+                ffff.transform.position = Vector3.Lerp(ffff.transform.position, -ffff.transform.up + new Vector3(ffff.transform.position.x, 0, ffff.transform.position.z), 0.01f);
+                if (Mathf.Abs(ffff.transform.position.y - MapMgr.Instance.transform.position.y) < 0.01f)
                 {
                     MapMgr.Instance.Init();
                     ffff.gameObject.transform.DetachChildren();
@@ -107,7 +108,7 @@ public class obj_Trigger: Obj_Char
                 }
             }
 
-            
+
         }
 
 
@@ -131,7 +132,7 @@ public class obj_Trigger: Obj_Char
         foreach (var item in _cubes)
         {
             item.gameObject.transform.SetParent(ffff.transform);
-            if(item.ObjAbove!=null)
+            if (item.ObjAbove != null)
                 item.ObjAbove.gameObject.transform.SetParent(ffff.transform);
         }
     }
@@ -163,7 +164,22 @@ public class obj_Trigger: Obj_Char
 
         return new Vector2Int(x + _center.Pos.x, y + _center.Pos.y);
     }
+    private Vector2Int CWRP(Vector2Int vec)
+    {
+        int x = (vec.y);
+        int y = -(vec.x);
 
+        return new Vector2Int(x, y);
+    }
+
+
+    private Vector2Int ACWRP(Vector2Int vec)
+    {
+        int x = -(vec.y);
+        int y = (vec.x);
+
+        return new Vector2Int(x, y);
+    }
     //NewX = X * Cos(α） -Y * Sin(α)
 
     //NewY = X * Sin(α) + Y * Cos(α)
@@ -173,20 +189,23 @@ public class obj_Trigger: Obj_Char
         foreach (var item in _cubes)
         {
             item.Pos = CWR(item.Pos);
-            if(item.ObjAbove != null && item.ObjAbove.GetComponent<Obj_Player>() != null)
+            if (item.ObjAbove != null && item.ObjAbove.tag == "Player")
             {
-                Vector2Int pos =  item.ObjAbove.GetComponent<Obj_Player>().dir;
-                item.ObjAbove.GetComponent<Obj_Player>().dir = CWR(pos);
+                Vector2Int pos = item.ObjAbove.GetComponent<Obj_Player>().dir;
+                item.ObjAbove.GetComponent<Obj_Player>().dir = CWRP(pos);
             }
-            else if(item.ObjAbove != null && item.ObjAbove.GetComponent<Obj_zombie>() != null)
+            if (item.ObjAbove != null && item.ObjAbove.tag == "Zombie")
             {
-                Vector2Int pos = item.ObjAbove.GetComponent<Obj_zombie>().dir;
-                item.ObjAbove.GetComponent<Obj_zombie>().dir = CWR(pos);
+
+                Vector2Int pos1 = item.ObjAbove.GetComponent<Obj_zombie>().dir;
+                item.ObjAbove.GetComponent<Obj_zombie>().dir = CWRP(pos1);
+                item.ObjAbove.GetComponent<Obj_zombie>().helper.showWay();
+
             }
             //int x =  (item.Pos.y-_center.Pos.y);
             //int y = -(item.Pos.x - _center.Pos.x);
 
-                //item.Pos = new Vector2Int(x + _center.Pos.x, y + _center.Pos.y);
+            //item.Pos = new Vector2Int(x + _center.Pos.x, y + _center.Pos.y);
         }
     }
 
@@ -195,20 +214,36 @@ public class obj_Trigger: Obj_Char
         foreach (var item in _cubes)
         {
             item.Pos = ACWR(item.Pos);
-            if (item.ObjAbove != null && item.ObjAbove.GetComponent<Obj_Player>() != null)
+            if (item.ObjAbove != null && item.ObjAbove.tag == "Player")
             {
                 Vector2Int pos = item.ObjAbove.GetComponent<Obj_Player>().dir;
-                item.ObjAbove.GetComponent<Obj_Player>().dir = ACWR(pos);
+                item.ObjAbove.GetComponent<Obj_Player>().dir = ACWRP(pos);
             }
-            else if (item.ObjAbove != null && item.ObjAbove.GetComponent<Obj_zombie>() != null)
+            if (item.ObjAbove != null && item.ObjAbove.tag == "Zombie")
             {
-                Vector2Int pos = item.ObjAbove.GetComponent<Obj_zombie>().dir;
-                item.ObjAbove.GetComponent<Obj_zombie>().dir = ACWR(pos);
+
+                Vector2Int pos1 = item.ObjAbove.GetComponent<Obj_zombie>().dir;
+                item.ObjAbove.GetComponent<Obj_zombie>().dir = ACWRP(pos1);
+                item.ObjAbove.GetComponent<Obj_zombie>().helper.showWay();
+
             }
+            Debug.Log("end");
             //int x = -(item.Pos.y - _center.Pos.y);
             //int y = (item.Pos.x - _center.Pos.x);
             //item.Pos = new Vector2Int(x + _center.Pos.x, y + _center.Pos.y);
 
+        }
+    }
+
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.transform.name);
+        if (other.transform.tag == "Player" || other.transform.tag == "Zombie")
+        {
+            tri = true;
         }
     }
 }
