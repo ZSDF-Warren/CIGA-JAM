@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class obj_Trigger : Obj_Char
 {
-
+    public AudioClip ac;
     public Animator A;
     [Header("点击触发按钮")]
     public bool tri;
@@ -92,34 +92,42 @@ public class obj_Trigger : Obj_Char
                     ffff.gameObject.transform.DetachChildren();
                     isMovingDown = false;
                     isRotating = false;
+
                     MapMgr.Instance.canMove = true;
+                    foreach (var item in _cubes)
+                    {
+                        if (item.ObjAbove != null && item.ObjAbove.gameObject.tag == "Zombie")
+                            item.ObjAbove.GetComponent<Obj_zombie>().helper.showWay();
+
+                    }
                 }
-            }
-            else
-            {
-                if (_angle == angle.cw)
+                else
                 {
-                    ffff.transform.rotation = Quaternion.Lerp(ffff.transform.rotation, Quaternion.FromToRotation(Vector3.forward, Vector3.right), Mathf.Clamp01((Time.time - startTime) / 15));
-                    if (Quaternion.Angle(ffff.transform.rotation, Quaternion.FromToRotation(Vector3.forward, Vector3.right)) < 0.01f)
-                        endRoutation();
+                    if (_angle == angle.cw)
+                    {
+                        ffff.transform.rotation = Quaternion.Lerp(ffff.transform.rotation, Quaternion.FromToRotation(Vector3.forward, Vector3.right), Mathf.Clamp01((Time.time - startTime) / 15));
+                        if (Quaternion.Angle(ffff.transform.rotation, Quaternion.FromToRotation(Vector3.forward, Vector3.right)) < 0.01f)
+                            endRoutation();
+                    }
+                    if (_angle == angle.acw)
+                    {
+                        ffff.transform.rotation = Quaternion.Lerp(ffff.transform.rotation, Quaternion.FromToRotation(Vector3.forward, -Vector3.right), Mathf.Clamp01((Time.time - startTime) / 15));
+                        if (Quaternion.Angle(ffff.transform.rotation, Quaternion.FromToRotation(Vector3.forward, -Vector3.right)) < 0.01f)
+                            endRoutation();
+                    }
                 }
-                if (_angle == angle.acw)
-                {
-                    ffff.transform.rotation = Quaternion.Lerp(ffff.transform.rotation, Quaternion.FromToRotation(Vector3.forward, -Vector3.right), Mathf.Clamp01((Time.time - startTime) / 15));
-                    if (Quaternion.Angle(ffff.transform.rotation, Quaternion.FromToRotation(Vector3.forward, -Vector3.right)) < 0.01f)
-                        endRoutation();
-                }
+
+
             }
 
 
         }
-
-
     }
 
     //once
     public void startRoutation()
     {
+        this.gameObject.GetComponent<AudioSource>().PlayOneShot(ac);
         MapMgr.Instance.canMove = false;
         getAllCubes();
         if (_angle == angle.acw)

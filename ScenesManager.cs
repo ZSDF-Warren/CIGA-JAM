@@ -38,6 +38,8 @@ public class ScenesManager
     /// </summary>
     public void SceneLoad()
     {
+        //GameObject.FindGameObjectWithTag("bgm").GetComponent<bgmMgr>().fadeIn();
+        _sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(_sceneName);
         isPowerOn = true;
     }
@@ -46,7 +48,10 @@ public class ScenesManager
     /// <param name="idx">关卡下表</param>
     /// </summary>
     public void SceneLoad(int idx)
+
     {
+        //GameObject.FindGameObjectWithTag("bgm").GetComponent<bgmMgr>().fadeIn();
+
         SceneManager.LoadScene(idx - 1);
         isPowerOn = false;
     }

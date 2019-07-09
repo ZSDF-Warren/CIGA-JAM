@@ -46,10 +46,11 @@ public class DirSave
     /// 私有类型的
     /// 无参构造
     /// </summary>
-    DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt";}
+    DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt"; ClearContent(); }
     //DirSave() { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName+".txt"; /*ClearContent();*/}
 
-
+    public void UpdateFile()
+    { _sceneName = SceneManager.GetActiveScene().name; path = Application.dataPath + "/Resources/" + _sceneName + ".txt"; _data.Clear(); /*ClearContent();*/ }
 
     //********************************************策划看*********************************************************//
     //    上面的两句话，有ClearContent();的语句为覆盖，测试1周目用
@@ -77,6 +78,7 @@ public class DirSave
     /// <param name="eDir"></param>
     public void SaveDirToFile(EDIR eDir) 
     {
+        UpdateFile();
         //文件读写流
         StreamReader sr = new StreamReader(path);
         //读取内容

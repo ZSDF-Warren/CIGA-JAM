@@ -51,4 +51,18 @@ public class MapMgr: MonoBehaviour
 
     }
 
+
+    private void Update()
+    {
+         if(Input.GetKeyDown(KeyCode.F1))
+        {
+            ScenesManager.Instance().isPowerOn = false;
+            ScenesManager.Instance().SceneLoad(1);
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            ScenesManager.Instance().isPowerOn = false;
+            ScenesManager.Instance().SceneLoad(2);
+        }
+    }
 }

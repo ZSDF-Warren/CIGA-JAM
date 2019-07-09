@@ -26,6 +26,7 @@ public class Obj_Player : Obj_Char
             gameObject.GetComponent<Obj_zombie>().enabled = true;
         }
 
+        DirSave.Instance().UpdateFile();
         DirSave.Instance().ClearContent();
         
     }
